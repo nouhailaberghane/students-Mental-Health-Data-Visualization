@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Data Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #555;
+            padding-bottom: 10px;
+            margin-top: 50px;
+            text-transform: uppercase;
+            font-size: 1.5em;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        td {
+            background-color: #fff;
+            color: #333;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #f1f1f1;
+        }
+
+        table caption {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Add your image here -->
+    <img src="{{ url_for('static', filename='photo.jpg') }}" alt="Mental Health Image">
+    <!-- Table for total records -->
+    <h2>Total Records</h2>
+    <table>
+        <caption>Total Records in Dataset</caption>
+        <thead>
+            <tr>
+                <th>Total Records</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ total_records[0][0] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Table for International vs Domestic Counts -->
+    <h2>International vs Domestic Counts</h2>
+    <table>
+        <caption>International vs Domestic Student Counts</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in inter_dom_counts %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Table for PHQ Stats -->
+    <h2>PHQ (Depression) Stats</h2>
+    <table>
+        <caption>Depression (PHQ) Statistics</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Min PHQ</th>
+                <th>Max PHQ</th>
+                <th>Avg PHQ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in phq_stats %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Table for SC Stats -->
+    <h2>SC (Stress) Stats</h2>
+    <table>
+        <caption>Stress (SC) Statistics</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Min SC</th>
+                <th>Max SC</th>
+                <th>Avg SC</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in sc_stats %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Table for AS Stats -->
+    <h2>AS (Anxiety) Stats</h2>
+    <table>
+        <caption>Anxiety (AS) Statistics</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Min AS</th>
+                <th>Max AS</th>
+                <th>Avg AS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in as_stats %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Table for Stay Scores -->
+    <h2>Stay Scores for International Students</h2>
+    <table>
+        <caption>Stay Scores (International Students)</caption>
+        <thead>
+            <tr>
+                <th>Stay Duration</th>
+                <th>Avg PHQ</th>
+                <th>Avg SC</th>
+                <th>Avg AS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in stay_scores %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
